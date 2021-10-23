@@ -1,6 +1,6 @@
 
 <p align="center">
-  <img src="https://github.com/lukexyz/insultswordfight/blob/master/media/transformer.png?raw=true" width=70%> 
+  <img src="https://github.com/lukexyz/insultswordfight/blob/master/media/transformer2.png?raw=true" width=100%> 
 </p>
 
 ## Setup environment with `nbdev`
