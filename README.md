@@ -1,5 +1,9 @@
 
-## Setup environment and `nbdev`
+<p align="center">
+  <img src="https://github.com/lukexyz/insultswordfight/blob/master/media/transformer.png?raw=true" width=70%> 
+</p>
+
+## Setup environment with `nbdev`
 
 * Ubuntu / WSL
 ```
