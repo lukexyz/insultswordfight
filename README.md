@@ -28,12 +28,12 @@ nbdev_install_git_hooks
 > `nbdev_build_docs` 
 
 ## References
-ISF at Monkey Island Fandom 🐒
-https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting
-https://strategywiki.org/wiki/The_Secret_of_Monkey_Island/Sword-Fighting_Insults
+ISF at Monkey Island Fandom 🐒  
+https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting  
+https://strategywiki.org/wiki/The_Secret_of_Monkey_Island/Sword-Fighting_Insults  
 GPT-Neo  
-https://huggingface.co/blog/few-shot-learning-gpt-neo-and-inference-api
+https://huggingface.co/blog/few-shot-learning-gpt-neo-and-inference-api  
 OpenAI GPT-3 Playground  
-https://beta.openai.com/playground/p/oahgFuR1ABeP2h8zO32caUNf
+https://beta.openai.com/playground/p/oahgFuR1ABeP2h8zO32caUNf  
 
 
