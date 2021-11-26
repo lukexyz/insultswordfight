@@ -1,3 +1,9 @@
+# Custom
+.streamlit/
+
+
+
+# Ignore
 .jekyll-cache/
 Gemfile.lock  
 *.bak
