@@ -2,7 +2,8 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {"create_input_string": "00_zingers_GPT-J.ipynb",
+index = {"get_insult_data": "00_zingers_GPT-J.ipynb",
+         "create_input_string": "00_zingers_GPT-J.ipynb",
          "generate_comeback": "00_zingers_GPT-J.ipynb"}
 
 modules = ["core.py"]
