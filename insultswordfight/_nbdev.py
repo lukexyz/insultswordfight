@@ -2,9 +2,10 @@
 
 __all__ = ["index", "modules", "custom_doc_links", "git_url"]
 
-index = {}
+index = {"create_input_string": "00_zingers_GPT-J.ipynb",
+         "generate_comeback": "00_zingers_GPT-J.ipynb"}
 
-modules = []
+modules = ["core.py"]
 
 doc_url = "https://lukexyz.github.io/insultswordfight/"
 
