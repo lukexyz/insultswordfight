@@ -15,7 +15,8 @@
 ☠️ Insult: I once owned a dog that was smarter than you. ☠️  
 `Comeback: (0) I hope you lost him.` 🔥🔥🔥   
 
-<br /><br />
+<br />
+
 ## References
 ISF at Monkey Island Fandom 🐒  
 → https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting  
@@ -31,6 +32,7 @@ Effectively using GPT-J and GPT-Neo, the GPT-3 open-source alternatives, with fe
 → https://nlpcloud.io/effectively-using-gpt-j-gpt-neo-gpt-3-alternatives-few-shot-learning.html  
 
 <br />
+
 ## Setup develoment environment with `nbdev`
 
 * Ubuntu / WSL
@@ -49,6 +51,7 @@ nbdev_install_git_hooks
 ```
 
 <br />
+
 ### Nbdev commands  
 
 #### 1. 🏗️ **Build lib** from notebooks  
