@@ -21,13 +21,8 @@ def fight(insult, client, df):
 
 
 def burn_book():
-
     col1, col2 = st.columns([1, 1])
     with col2:
-    #     if st.button("submit to burn book +"):
-    #         st.session_state.burn_book_flag = True
-
-    # if st.session_state.burn_book_flag == True:
         with st.form(key='my_form'):
             submission = st.selectbox("Select", st.session_state.zingers)
             submit_form = st.form_submit_button(label='Submit')
@@ -58,8 +53,8 @@ def main():
                 "I've seen better moves in a senior citizen Zumba class!",
                 "This girl is the nastiest skank bitch I've ever met"]
 
+    st.write(df.Insult.head(5))
     insult = st.text_input(label="Input", value=insults[0])
-
 
     if st.button('Fire!'):
         st.session_state.fire_flag = True
@@ -72,6 +67,8 @@ def main():
 
             col1, col2 = st.columns([2, 1])
             with col2:
+                st.write("")
+                st.write("")
                 if st.button('+ add to burn book'):
                     st.session_state.burn_book_flag = True
             placeholder_b = st.empty()
@@ -88,9 +85,6 @@ def main():
             if st.button('Reset'):
                 st.session_state.fire_flag = False
                 placeholder_a.empty()
-
-
-
 
     # -------------------------------------------------------- #
     st.write("")
