@@ -5,77 +5,14 @@ import streamlit as st
 import nlpcloud
 from insultswordfight.core import get_insult_data, create_input_string, generate_comeback
 
-st.set_page_config(page_title="Insult Sword Fighting", page_icon="☠️")
 
-# ------------------------test zone------------------------ #
-if 'control_flow' not in st.session_state: 
-    st.session_state.control_flow = 0
-    st.session_state.a = False
-    st.session_state.b = False
-
-
-if st.button('open a'):
-    st.session_state.a = True
-
-placeholder_a = st.empty()
-
-if st.session_state.a == True:
-
-    with placeholder_a.container():
-        st.header('A Open')
-
-        if st.button('open b'):
-            st.session_state.b = True
-        placeholder_b = st.empty()
-        if st.session_state.b == True:
-
-            with placeholder_b.container():
-                st.header('B Open')
-                if st.button('close b'):
-                    st.session_state.b = False
-                    placeholder_b.empty()
-
-
-        if st.button('close a'):
-            st.session_state.a = False
-            placeholder_a.empty()
-
-
-# -------------------------------------------------------- #
-
-if ['count', 'fire', 'zingers', 'burn_book'] not in st.session_state:
-    st.session_state.count = 0
-    st.session_state.zingers = ""
-    st.session_state.burn_book = False
-    st.session_state.burn_book = False
-
-# -------------------------------------------------------- #
-with st.expander("Learn about Monkey Island 🌄", expanded=False):
-    st.write("The Curse of Monkey Island (1995)")
-    st.write("")
-
-st.header('Insult Sword Fighting')
-st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
-
-# -------------------------------------------------------- # 
-
-
-client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
-df = get_insult_data()
-
-insults = [ "test insult", 
-            "This girl is the nastiest skank bitch I've ever met!",
-            "I've seen better fighting in a senior citizen Zumba class!"]
-
-insult = st.text_input(label="Input", value=insults[0])
-
-st.session_state.fire = st.button(label='Fire!')
-if st.session_state.fire:
-    #st.session_state.burn_book = False
+def fight(insult, client, df):
     outputs = 1
+    training_examples = 7
+
     if insult == "test insult": st.session_state.zingers = ['comeback #1', "comeback #2"]
     else: 
-        st.session_state.zingers = generate_comeback(insult, client, df, outputs, training_examples=7)
+        st.session_state.zingers = generate_comeback(insult, client, df, outputs, training_examples)
         st.session_state.count += outputs
 
     st.write(f'Insult: ☠️ {insult} ☠️\n')
@@ -83,26 +20,89 @@ if st.session_state.fire:
         st.write(f"\tComeback: `{zinger}` 🔥🔥🔥\n")
 
 
-# submit to burn book
-col1, col2 = st.columns([3, 1])
-with col2:
-    if st.button("submit to burn book +"):
-        st.session_state.burn_book = True
-    #st.session_state.burn_book = False
+def burn_book():
+
+    col1, col2 = st.columns([1, 1])
+    with col2:
+    #     if st.button("submit to burn book +"):
+    #         st.session_state.burn_book_flag = True
+
+    # if st.session_state.burn_book_flag == True:
+        with st.form(key='my_form'):
+            submission = st.selectbox("Select", st.session_state.zingers)
+            submit_form = st.form_submit_button(label='Submit')
+            if submit_form: 
+                st.balloons()
 
 
-if st.session_state.burn_book == True:
-    with st.form(key='my_form'):
-        submission = st.selectbox("Select", st.session_state.zingers)
-        submit_form = st.form_submit_button(label='Submit')
-        if submit_form: 
-            st.balloons()
-    
-    # if st.button('Submit'):
-    #     
-    #     st.write(f'You submitted {submission} to the burn book')
+def main():
+    # ------------------------ control flow ------------------------ #
+    if 'count' not in st.session_state: 
+        st.session_state.count = 0
+        st.session_state.fire_flag = False
+        st.session_state.burn_book_flag = False
+        st.session_state.zingers = []
 
-st.write("")
-st.write('Burn book', st.session_state.burn_book)
-st.write('zingers', st.session_state.zingers)
-st.write(f'API count = `{st.session_state.count}`')
+    # --------------------------- header  -------------------------- #
+    with st.expander("More about Monkey Island 🌄", expanded=False):
+        st.write("The Curse of Monkey Island (1995)")
+        st.write("")
+
+    st.markdown("<h1 style='text-align: center;'>Insult Sword Fight</h1>", unsafe_allow_html=True)
+    st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
+
+    client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
+    df = get_insult_data()
+
+    insults = [ "test insult", 
+                "I've seen better moves in a senior citizen Zumba class!",
+                "This girl is the nastiest skank bitch I've ever met"]
+
+    insult = st.text_input(label="Input", value=insults[0])
+
+
+    if st.button('Fire!'):
+        st.session_state.fire_flag = True
+
+    placeholder_a = st.empty()
+
+    if st.session_state.fire_flag == True:
+        with placeholder_a.container():
+            fight(insult, client, df)
+
+            col1, col2 = st.columns([2, 1])
+            with col2:
+                if st.button('+ add to burn book'):
+                    st.session_state.burn_book_flag = True
+            placeholder_b = st.empty()
+            if st.session_state.burn_book_flag == True:
+
+                with placeholder_b.container():
+                    burn_book()
+                    col1, col2 = st.columns([2, 1])
+                    with col2:
+                        if st.button('- close burn book'):
+                            st.session_state.burn_book_flag = False
+                            placeholder_b.empty()
+
+            if st.button('Reset'):
+                st.session_state.fire_flag = False
+                placeholder_a.empty()
+
+
+
+
+    # -------------------------------------------------------- #
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write("")
+    st.write(f'API count = `{st.session_state.count}`')
+
+
+if __name__ == '__main__':
+    st.set_page_config(page_title="Insult Sword Fighting",
+        page_icon="☠️",
+        layout="centered",
+        initial_sidebar_state="auto")
+    main()
