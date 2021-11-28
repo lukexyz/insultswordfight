@@ -13,31 +13,35 @@ if 'control_flow' not in st.session_state:
     st.session_state.a = False
     st.session_state.b = False
 
-control_flow = st.session_state.control_flow
 
-if control_flow == 0:
-    if st.button('open a'):
-        st.session_state.a = True
+if st.button('open a'):
+    st.session_state.a = True
+
+placeholder_a = st.empty()
 
 if st.session_state.a == True:
-    if st.button('close a'):
-        st.session_state.a = False
 
-st.write(st.session_state)
+    with placeholder_a.container():
+        st.header('A Open')
 
-st.write('')
-st.write('')
-st.write('')
-st.write('')
-st.write('')
-st.write('')
+        if st.button('open b'):
+            st.session_state.b = True
+        placeholder_b = st.empty()
+        if st.session_state.b == True:
 
+            with placeholder_b.container():
+                st.header('B Open')
+                if st.button('close b'):
+                    st.session_state.b = False
+                    placeholder_b.empty()
+
+
+        if st.button('close a'):
+            st.session_state.a = False
+            placeholder_a.empty()
 
 
 # -------------------------------------------------------- #
-
-
-
 
 if ['count', 'fire', 'zingers', 'burn_book'] not in st.session_state:
     st.session_state.count = 0
