@@ -7,6 +7,38 @@ from insultswordfight.core import get_insult_data, create_input_string, generate
 
 st.set_page_config(page_title="Insult Sword Fighting", page_icon="☠️")
 
+# ------------------------test zone------------------------ #
+if 'control_flow' not in st.session_state: 
+    st.session_state.control_flow = 0
+    st.session_state.a = False
+    st.session_state.b = False
+
+control_flow = st.session_state.control_flow
+
+if control_flow == 0:
+    if st.button('open a'):
+        st.session_state.a = True
+
+if st.session_state.a == True:
+    if st.button('close a'):
+        st.session_state.a = False
+
+st.write(st.session_state)
+
+st.write('')
+st.write('')
+st.write('')
+st.write('')
+st.write('')
+st.write('')
+
+
+
+# -------------------------------------------------------- #
+
+
+
+
 if ['count', 'fire', 'zingers', 'burn_book'] not in st.session_state:
     st.session_state.count = 0
     st.session_state.zingers = ""
@@ -14,7 +46,7 @@ if ['count', 'fire', 'zingers', 'burn_book'] not in st.session_state:
     st.session_state.burn_book = False
 
 # -------------------------------------------------------- #
-with st.expander("Learn more about Monkey Island 🌄", expanded=False):
+with st.expander("Learn about Monkey Island 🌄", expanded=False):
     st.write("The Curse of Monkey Island (1995)")
     st.write("")
 
