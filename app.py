@@ -5,6 +5,9 @@ import streamlit as st
 import nlpcloud
 from insultswordfight.core import get_insult_data, create_input_string, generate_comeback
 
+from prodb.core import generate_db, insert_row, utc_now, readable_df
+
+
 
 def fight(insult, client, df):
     outputs = 1
@@ -31,6 +34,13 @@ def burn_book():
 
 
 def main():
+
+    # -------------------- initialize burn book -------------------- #
+    dbpath = 'bb.csv'
+    if not os.path.isfile(dbpath): 
+        bb = generate_db(dbpath=dbpath, cols=['time_utc', 'insult', 'comeback'])
+    else: bb = pd.read_csv(dbpath)
+
     # ------------------------ control flow ------------------------ #
     if 'count' not in st.session_state: 
         st.session_state.count = 0
@@ -44,7 +54,7 @@ def main():
         st.write("")
 
     st.markdown("<h1 style='text-align: center;'>Insult Sword Fight</h1>", unsafe_allow_html=True)
-    st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
+    st.write("`Pirate` ☠️ vs. 🤖 `GPT-J`") 
 
     client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
     df = get_insult_data()
@@ -54,7 +64,7 @@ def main():
                 "This girl is the nastiest skank bitch I've ever met"]
 
     st.write(df.Insult.head(5))
-    insult = st.text_input(label="Input", value=insults[0])
+    insult = st.text_input(label="Input", value=insults[2])
 
     if st.button('Fire!'):
         st.session_state.fire_flag = True
@@ -65,27 +75,11 @@ def main():
         with placeholder_a.container():
             fight(insult, client, df)
 
-            col1, col2 = st.columns([2, 1])
-            with col2:
-                st.write("")
-                st.write("")
-                if st.button('+ add to burn book'):
-                    st.session_state.burn_book_flag = True
-            placeholder_b = st.empty()
-            if st.session_state.burn_book_flag == True:
+    if st.button('add to burn book v2'):
+        data = {'time_utc':utc_now(), 'insult':insult, 'comeback': st.session_state.zingers[0]}
+        bb = insert_row(bb, data, dbpath)
 
-                with placeholder_b.container():
-                    burn_book()
-                    col1, col2 = st.columns([2, 1])
-                    with col2:
-                        if st.button('- close burn book'):
-                            st.session_state.burn_book_flag = False
-                            placeholder_b.empty()
-
-            if st.button('Reset'):
-                st.session_state.fire_flag = False
-                placeholder_a.empty()
-
+    st.table(readable_df(bb, max_rows=10))
     # -------------------------------------------------------- #
     st.write("")
     st.write("")

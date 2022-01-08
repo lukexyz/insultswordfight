@@ -1,6 +1,7 @@
 # Custom
 .streamlit/
-
+db.csv
+bb.csv
 
 
 # Ignore
