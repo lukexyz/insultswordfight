@@ -53,7 +53,7 @@ def main():
         st.write("The Curse of Monkey Island (1995)")
         st.write("")
 
-    st.markdown("<h1 style='text-align: center;'>Insult Sword Fight</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='text-align: center;'>Insult Sword Fighting</h1>", unsafe_allow_html=True)
     st.write("`Pirate` ☠️ vs. 🤖 `GPT-J`") 
 
     client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
@@ -74,12 +74,15 @@ def main():
     if st.session_state.fire_flag == True:
         with placeholder_a.container():
             fight(insult, client, df)
-    st.write('if you got burnt by a savage zinger, share it in the burn book')
-    if st.button('add to burn book v2'):
+
+    st.write("")
+    st.markdown("---")
+    st.write('Have a savage zinger? Share it in the burn book')
+    if st.button('+ add to burn book'):
         data = {'time_utc':utc_now(), 'insult':insult, 'comeback': st.session_state.zingers[0]}
         bb = insert_row(bb, data, dbpath)
 
-    st.table(readable_df(bb, max_rows=10))
+    st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
     # -------------------------------------------------------- #
     st.write("")
     st.write("")
