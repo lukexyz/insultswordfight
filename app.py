@@ -6,7 +6,7 @@ import nlpcloud
 from insultswordfight.core import get_insult_data, create_input_string, generate_comeback
 
 from prodb.core import generate_db, insert_row, utc_now, readable_df
-
+import arrow
 
 
 def fight(insult, client, df):
@@ -49,7 +49,7 @@ def main():
         st.session_state.zingers = []
 
     # --------------------------- header  -------------------------- #
-    with st.expander("More about Monkey Island 🌄", expanded=False):
+    with st.expander("Monkey Island 🌄", expanded=False):
         st.write("The Curse of Monkey Island (1995)")
         st.write("")
 
@@ -74,7 +74,7 @@ def main():
     if st.session_state.fire_flag == True:
         with placeholder_a.container():
             fight(insult, client, df)
-
+    st.write('if you got burnt by a savage zinger, share it in the burn book')
     if st.button('add to burn book v2'):
         data = {'time_utc':utc_now(), 'insult':insult, 'comeback': st.session_state.zingers[0]}
         bb = insert_row(bb, data, dbpath)
