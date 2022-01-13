@@ -9,7 +9,7 @@ from prodb.core import generate_db, insert_row, utc_now, readable_df
 import arrow
 
 
-def fight(insult, client, df):
+def fight(insult, client, df): 
     outputs = 1
     training_examples = 7
 
