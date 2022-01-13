@@ -53,6 +53,8 @@ def main():
         st.write("The Curse of Monkey Island (1995)")
         st.write("")
 
+    st.image('media/secretofmonkeyisland_splash.jpg')
+
     st.markdown("<h1 style='text-align: center;'>Insult Sword Fighting</h1>", unsafe_allow_html=True)
     st.write("`Pirate` ☠️ vs. 🤖 `GPT-J`") 
 
@@ -77,6 +79,8 @@ def main():
 
     st.write("")
     st.markdown("---")
+
+    # if insult not in example_insults
     st.write('Have a savage zinger? Share it in the burn book')
     if st.button('+ add to burn book'):
         data = {'time_utc':utc_now(), 'insult':insult, 'comeback': st.session_state.zingers[0]}
