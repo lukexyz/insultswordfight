@@ -49,14 +49,17 @@ def main():
         st.session_state.zingers = []
 
     # --------------------------- header  -------------------------- #
-    with st.expander("Monkey Island 🌄", expanded=False):
-        st.write("The Curse of Monkey Island (1995)")
-        st.write("")
-
-    st.image('media/secretofmonkeyisland_splash.jpg')
 
     st.markdown("<h1 style='text-align: center;'>Insult Sword Fighting</h1>", unsafe_allow_html=True)
     st.write("`Pirate` ☠️ vs. 🤖 `GPT-J`") 
+
+    st.image('media/image.png')
+
+    # --------------------------- header  -------------------------- #
+    df = get_insult_data()
+    with st.expander("Examples from Monkey Island 🌄", expanded=False):
+        st.write(df.Insult.head(5))
+
 
     client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
     df = get_insult_data()
@@ -65,7 +68,6 @@ def main():
                 "I've seen better moves in a senior citizen Zumba class!",
                 "This girl is the nastiest skank bitch I've ever met"]
 
-    st.write(df.Insult.head(5))
     insult = st.text_input(label="Input", value=insults[2])
 
     if st.button('Fire!'):
@@ -76,23 +78,28 @@ def main():
     if st.session_state.fire_flag == True:
         with placeholder_a.container():
             fight(insult, client, df)
+            st.session_state.fire_flag = False
 
     st.write("")
     st.markdown("---")
 
-    # if insult not in example_insults
-    st.write('Have a savage zinger? Share it in the burn book')
-    if st.button('+ add to burn book'):
-        data = {'time_utc':utc_now(), 'insult':insult, 'comeback': st.session_state.zingers[0]}
-        bb = insert_row(bb, data, dbpath)
+    
+    with st.expander("Open Burnbook Island 🌄", expanded=False):
 
-    st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
+        # if insult not in example_insults
+        st.write('Have a savage zinger? Share it in the burn book')
+        if st.button('+ add to burn book'):
+            data = {'time_utc':utc_now(), 'insult':insult, 'comeback': st.session_state.zingers[0]}
+            bb = insert_row(bb, data, dbpath)
+
+        st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
     # -------------------------------------------------------- #
     st.write("")
     st.write("")
     st.write("")
     st.write("")
     st.write(f'API count = `{st.session_state.count}`')
+
 
 
 if __name__ == '__main__':
