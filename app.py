@@ -3,6 +3,7 @@ import time
 import pandas as pd
 import streamlit as st
 import nlpcloud
+
 from insultswordfight.core import get_insult_data, create_input_string, generate_comeback
 
 from prodb.core import generate_db, insert_row, utc_now, readable_df
@@ -49,16 +50,23 @@ def main():
         st.session_state.zingers = []
 
     # --------------------------- header  -------------------------- #
+    # Hack for centering image
+    pcol1, pcol2, pcol3 = st.columns([1,3,1])
+    with pcol1: st.write("")
+    with pcol2: st.image('media/monkey_island_dock_splash_transparent.png', width=400)
+    with pcol3: st.write("")
 
     st.markdown("<h1 style='text-align: center;'>Insult Sword Fighting</h1>", unsafe_allow_html=True)
-    st.write("`Pirate` ☠️ vs. 🤖 `GPT-J`") 
+    st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
 
-    st.image('media/image.png')
+
+    
 
     # --------------------------- header  -------------------------- #
     df = get_insult_data()
     with st.expander("Examples from Monkey Island 🌄", expanded=False):
-        st.write(df.Insult.head(5))
+        st.image('media/The_Making_of_Monkey_Island_30th_Anniversary_Documentary.gif')
+        st.table(df.head(5))
 
 
     client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
@@ -68,7 +76,7 @@ def main():
                 "I've seen better moves in a senior citizen Zumba class!",
                 "This girl is the nastiest skank bitch I've ever met"]
 
-    insult = st.text_input(label="Input", value=insults[2])
+    insult = st.text_input(label="🔥 Submit Your Own 🔥", value=insults[2])
 
     if st.button('Fire!'):
         st.session_state.fire_flag = True
@@ -83,13 +91,15 @@ def main():
     st.write("")
     st.markdown("---")
 
-    
-    with st.expander("Open Burnbook Island 🌄", expanded=False):
-
+    st.write('Have a savage zinger? Share it in the burn book')
+    with st.expander("Open Burnbook", expanded=False):
         # if insult not in example_insults
-        st.write('Have a savage zinger? Share it in the burn book')
+        st.write(f'Insult: {insult}')
+        st.write(f'Comeback {st.session_state.zingers[0]}🔥🔥🔥')
         if st.button('+ add to burn book'):
-            data = {'time_utc':utc_now(), 'insult':insult, 'comeback': st.session_state.zingers[0]}
+            
+            data = {'time_utc':utc_now(), 'insult':f"☠️ {insult} ☠️",
+                    'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
             bb = insert_row(bb, data, dbpath)
 
         st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
