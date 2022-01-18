@@ -63,8 +63,12 @@ def main():
     # --------------------------- header  -------------------------- #
     df = get_insult_data()
     with st.expander("Examples from Monkey Island 🌄", expanded=False):
+        st.write("* Insult Sword Fighting is a battle of wits from the 90s game [Monkey Island](https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting).")
+        st.write("* As you progress you learn more insults, and more importantly, know when to use them.")
         st.image('media/The_Making_of_Monkey_Island_30th_Anniversary_Documentary.gif')
+        st.write('Here are some of the original insult/comback pairs from the game, which form the training dataset.')
         st.table(df.head(5))
+        st.write("You can try using some of these insults to get started, but it's more fun coming up with your own 💅")
 
 
     client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
@@ -74,7 +78,7 @@ def main():
                 "I've seen better moves in a senior citizen Zumba class!",
                 "This girl is the nastiest skank bitch I've ever met"]
 
-    insult = st.text_input(label="🔥 Submit Your Own 🔥", value=insults[2])
+    insult = st.text_input(label="☠️ Submit Your Insult ☠️", value=insults[2])
 
     if st.button('Fire!'):
         st.session_state.fire_flag = True
@@ -89,22 +93,23 @@ def main():
     st.write("")
     st.markdown("---")
 
-    st.write('Been hurt by a savage zinger? Share it in the burn book 🥰📒')
-    with st.expander("Open Burnbook", expanded=False):
-        # if insult not in example_insults
-        zinger = st.session_state.zingers[0]
+    if st.session_state.zingers:
+        st.write('Been hurt by a savage zinger? Share it in the burn book 💔💔💔')
+        with st.expander("Open Burnbook", expanded=False):
+            # if insult not in example_insults
+            zinger = st.session_state.zingers
 
-        if zinger:
-            st.write(f'Insult: ☠️ {insult} ☠️\n')
-            if st.session_state.zingers[0]:
-                st.write(f'\tComeback: `{zinger}` 🔥🔥🔥\n')
-                if st.button('+ add to burn book'):
-                    data = {'time_utc':utc_now(), 'insult':f"☠️ {insult} ☠️",
-                            'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
-                    bb = insert_row(bb, data, dbpath)
-        else: st.write('Generate zinger above')
+            if zinger:
+                st.write(f'Insult: ☠️ {insult} ☠️\n')
+                if st.session_state.zingers[0]:
+                    st.write(f'\tComeback: `{zinger}` 🔥🔥🔥\n')
+                    if st.button('+ add to burn book'):
+                        data = {'time_utc':utc_now(), 'insult':f"☠️ {insult} ☠️",
+                                'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
+                        bb = insert_row(bb, data, dbpath)
+            else: st.write('Generate zinger above')
 
-        st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
+            st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
     # -------------------------------------------------------- #
     st.write("")
     st.write("")
