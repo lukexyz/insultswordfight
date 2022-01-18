@@ -60,8 +60,6 @@ def main():
     st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
 
 
-    
-
     # --------------------------- header  -------------------------- #
     df = get_insult_data()
     with st.expander("Examples from Monkey Island 🌄", expanded=False):
@@ -91,16 +89,20 @@ def main():
     st.write("")
     st.markdown("---")
 
-    st.write('Have a savage zinger? Share it in the burn book')
+    st.write('Been hurt by a savage zinger? Share it in the burn book 🥰📒')
     with st.expander("Open Burnbook", expanded=False):
         # if insult not in example_insults
-        st.write(f'Insult: {insult}')
-        st.write(f'Comeback {st.session_state.zingers[0]}🔥🔥🔥')
-        if st.button('+ add to burn book'):
-            
-            data = {'time_utc':utc_now(), 'insult':f"☠️ {insult} ☠️",
-                    'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
-            bb = insert_row(bb, data, dbpath)
+        zinger = st.session_state.zingers[0]
+
+        if zinger:
+            st.write(f'Insult: ☠️ {insult} ☠️\n')
+            if st.session_state.zingers[0]:
+                st.write(f'\tComeback: `{zinger}` 🔥🔥🔥\n')
+                if st.button('+ add to burn book'):
+                    data = {'time_utc':utc_now(), 'insult':f"☠️ {insult} ☠️",
+                            'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
+                    bb = insert_row(bb, data, dbpath)
+        else: st.write('Generate zinger above')
 
         st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
     # -------------------------------------------------------- #
