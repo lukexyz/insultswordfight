@@ -94,7 +94,7 @@ def main():
     st.markdown("---")
 
     if st.session_state.zingers:
-        st.write('Been hurt by a savage zinger? Share it in the burn book 💔💔💔')
+        st.write('Hurt by a savage zinger? Share it in the burn book 💔')
         with st.expander("Open Burnbook", expanded=False):
             # if insult not in example_insults
             zinger = st.session_state.zingers
