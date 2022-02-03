@@ -77,7 +77,7 @@ def main():
     insults = [ "test insult", 
                 "I've seen better moves in a senior citizen Zumba class!",
                 "This girl is the nastiest skank bitch I've ever met"]
-
+ 
     insult = st.text_input(label="☠️ Submit Your Insult ☠️", value=insults[2])
 
     if st.button('Fire!'):
