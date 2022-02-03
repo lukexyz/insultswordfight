@@ -17,6 +17,48 @@
 
 <br />
 
+## Development Notebook using `GPT-J`
+Few-shot Learning with GPT-J  
+> :bookmark_tabs: [zingers_GPT-J.ipynb](https://github.com/lukexyz/insultswordfight/blob/master/notebooks/00_zingers_GPT-J.ipynb)
+
+### Few Shot Learning
+Using the monkey island insult database, I create a text block showing the examples which I want the model to emulate. In this case, it's 3 pairs of `insult`: `comeback` pairs. 
+
+The final portion is the user input `insult`, and then the non-closure text "`comeback: `". This gives the language model no other option but to reply with what it thinks is the most appropriate response.
+
+```py
+# example API call
+generation = client.generation("""Insult: You fight like a dairy Farmer!
+            Comeback: How appropriate. You fight like a cow!
+            ###
+            Insult: This is the END for you, you gutter crawling cur!
+            Comeback: And I've got a little TIP for you, get the POINT?
+            ###
+            Insult: I've spoken with apes more polite than you!
+            Comeback: I'm glad to hear you attended your family reunion!
+            ###
+            Insult: Soon you'll be wearing my sword like a shish kebab!
+            Comeback: First you'd better stop waving it like a feather duster.
+            ###
+            Insult: I once owned a dog that was smarter than you.
+            Comeback: """,
+    max_length=100,
+    length_no_input=True,
+    end_sequence="\n###",
+    remove_input=True)
+
+print('\n🔥🔥🔥 ', generation["generated_text"])
+```
+
+### Online Demo
+
+Code here:
+> :bookmark_tabs: [app.py](https://github.com/lukexyz/insultswordfight/blob/master/notebooks/00_zingers_GPT-J.ipynb)
+
+The web app is running online at [pirateinsults.com](pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish. 
+
+The web app is created with streamlit, hosted (free) by streamlit.io, but I've created a blind redirect from [pirateinsults.com](pirateinsults.com) to go from my custom domain to the internal streamlit domain they gave me. 
+
 ## References
 ISF at Monkey Island Fandom 🐒  
 → https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting  
