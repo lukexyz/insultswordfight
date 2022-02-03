@@ -4,22 +4,21 @@
   <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/secretofmonkeyisland_splash.jpg" width=100%> 
 </p>  
 
+#### Online Demo 🔗 (using streamlit)
+## [www.pirateinsults.com](https://github.com/lukexyz/insultswordfight/blob/master/app.py) 
+<br />
 
 ## Generated zingers 🍒
+
+☠️ Insult: I once owned a dog that was smarter than you. ☠️  
+`Comeback: (0) I hope you lost him.` 🔥🔥🔥   
+
 ☠️ Insult: Heaven preserve me! You look like something that's died! ☠️  
 `Comeback: (0)  If you ever need an autopsy, I'd be glad to do it.`  🔥🔥🔥   
 
 ☠️ Insult: Killing you would be justifiable homicide! ☠️  
 `Comeback: (0)  Unless it was murder, then you'd be guilty of suicide.` 🔥🔥🔥   
-
-☠️ Insult: I once owned a dog that was smarter than you. ☠️  
-`Comeback: (0) I hope you lost him.` 🔥🔥🔥   
-
 <br />
-
-## Development Notebook using `GPT-J`
-Few-shot Learning with GPT-J  
-> :bookmark_tabs: [zingers_GPT-J.ipynb](https://github.com/lukexyz/insultswordfight/blob/master/notebooks/00_zingers_GPT-J.ipynb)
 
 ### Few Shot Learning
 Using the monkey island insult database, I create a text block showing the examples which I want the model to emulate. In this case, it's 3 pairs of `insult`: `comeback` pairs. 
@@ -49,6 +48,8 @@ generation = client.generation("""Insult: You fight like a dairy Farmer!
 
 print('\n🔥🔥🔥 ', generation["generated_text"])
 ```
+## Development Notebook using `GPT-J`
+> :bookmark_tabs: [zingers_GPT-J.ipynb](https://github.com/lukexyz/insultswordfight/blob/master/notebooks/00_zingers_GPT-J.ipynb)
 
 ### Online Demo
 
