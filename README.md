@@ -55,9 +55,9 @@ print('\n🔥🔥🔥 ', generation["generated_text"])
 Code here:  
 :bookmark_tabs: [app.py](https://github.com/lukexyz/insultswordfight/blob/master/app.py)
 
-The web app is running online at [pirateinsults.com](pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish. 
+The web app is running online at [pirateinsults.com](http://pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish. 
 
-The web app is created with streamlit, hosted (free) by streamlit.io, but I've created a blind redirect from my custom domain [pirateinsults.com](pirateinsults.com) to go to the internal streamlit IP they gave me. 
+The web app is created with streamlit, hosted (free) by streamlit.io, but I've created a blind redirect from my custom domain [pirateinsults.com](http://pirateinsults.com) to go to the internal streamlit IP they gave me. 
 
 ## References
 ISF at Monkey Island Fandom 🐒  
