@@ -5,7 +5,7 @@
 </p>  
 
 #### Online Demo 🔗 (using streamlit)
-## [www.pirateinsults.com](https://github.com/lukexyz/insultswordfight/blob/master/app.py) 
+## [🏴‍☠️ pirateinsults.com](https://github.com/lukexyz/insultswordfight/blob/master/app.py) 
 <br />
 
 ## Generated zingers 🍒
@@ -20,7 +20,7 @@
 `Comeback: (0)  Unless it was murder, then you'd be guilty of suicide.` 🔥🔥🔥   
 <br />
 
-### Few Shot Learning
+## Few Shot Learning
 Using the monkey island insult database, I create a text block showing the examples which I want the model to emulate. In this case, it's 3 pairs of `insult`: `comeback` pairs. 
 
 The final portion is the user input `insult`, and then the non-closure text "`comeback: `". This gives the language model no other option but to reply with what it thinks is the most appropriate response.
@@ -51,14 +51,16 @@ print('\n🔥🔥🔥 ', generation["generated_text"])
 ## Development Notebook using `GPT-J`
 > :bookmark_tabs: [zingers_GPT-J.ipynb](https://github.com/lukexyz/insultswordfight/blob/master/notebooks/00_zingers_GPT-J.ipynb)
 
-### Online Demo
+## Online Demo
 
-Code here:  
-:bookmark_tabs: [app.py](https://github.com/lukexyz/insultswordfight/blob/master/app.py)
+Streamlit script  
+> :bookmark_tabs: [app.py](https://github.com/lukexyz/insultswordfight/blob/master/app.py)
 
 The web app is running online at [pirateinsults.com](http://pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish. 
 
 The web app is created with streamlit, hosted (free) by streamlit.io, but I've created a blind redirect from my custom domain [pirateinsults.com](http://pirateinsults.com) to go to the internal streamlit IP they gave me. 
+
+<br />
 
 ## References
 ISF at Monkey Island Fandom 🐒  
@@ -82,8 +84,6 @@ Thanks for a lot of the insults gameplay coming from Orson Scott Card and his ch
 
 [/u/crumpuppet](https://www.reddit.com/r/MonkeyIsland/comments/if1wcs/i_made_a_monkey_island_sword_fighting_insult)
 
-<br />
-
 ## Setup develoment environment with `nbdev`
 
 * Ubuntu / WSL
@@ -101,13 +101,11 @@ pip install -r requirements.txt
 nbdev_install_git_hooks
 ```
 
-<br />
 
 ### Nbdev commands  
 
 #### 1. 🏗️ **Build lib** from notebooks  
 > `nbdev_build_lib` 
-
 
 #### 2. 📝 **Build docs** from notebooks  
 > `nbdev_build_docs` 
