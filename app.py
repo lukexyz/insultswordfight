@@ -34,6 +34,9 @@ def burn_book():
                 st.balloons()
 
 
+
+
+
 def main():
 
     # -------------------- initialize burn book -------------------- #
@@ -53,35 +56,40 @@ def main():
     # Hack for centering image
     pcol1, pcol2, pcol3 = st.columns([1,3,1])
     with pcol1: st.write("")
-    with pcol2: st.image('media/monkey_island_dock_splash_transparent.png', width=400)
+    with pcol2: st.image('media/Splash_Header_small.png')
     with pcol3: st.write("")
 
-    st.markdown("<h1 style='text-align: center;'>Insult Sword Fighting</h1>", unsafe_allow_html=True)
+    st.markdown("<h2 style='text-align: center;'>Insult Sword Fighting</h2>", unsafe_allow_html=True)
     st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
 
 
     # --------------------------- header  -------------------------- #
     df = get_insult_data()
-    with st.expander("Examples from Monkey Island 🌄", expanded=False):
-        st.write("* Insult Sword Fighting is a battle of wits from the 90s game [Monkey Island](https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting).")
-        st.write("* As you progress you learn more insults, and more importantly, know when to use them.")
-        st.image('media/The_Making_of_Monkey_Island_30th_Anniversary_Documentary.gif')
+    with st.expander("Learn more about Monkey Island 🌄", expanded=False):
+        st.write("`Insult Sword Fighting` is a word-puzzle from the video game [Monkey Island](https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting) (1990). As you progress through the game you learn more insults, and win fights by using the right comeback at the right time.")
+        ecol1, ecol2, ecol3 = st.columns([1,4,1])
+        with ecol1: st.write("")
+        with ecol2: st.image('media/The_Making_of_Monkey_Island_30th_Anniversary_Documentary_cropped.gif')
+        with ecol3: st.write("")
+        
         st.write('Here are some of the original insult/comback pairs from the game, which form the training dataset.')
-        st.table(df.head(5))
-        st.write("You can try using some of these insults to get started, but it's more fun coming up with your own 💅")
+        rows = st.slider('How many training exmples to display?', 1, 15, 5)
+        st.table(df.head(rows))
+        st.write("`You can try using some of these insults to get started, but it's more fun coming up with your own!` 💅")
 
-
+    st.write("")
     client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
     df = get_insult_data()
 
     insults = [ "test insult", 
                 "I've seen better moves in a senior citizen Zumba class!",
                 "This girl is the nastiest skank bitch I've ever met"]
- 
-    insult = st.text_input(label="Input your own insult below 👇", value=insults[2])
 
-    if st.button('Fire!'):
-        st.session_state.fire_flag = True
+    icol1, icol2 = st.columns([5,1])
+    with icol1: insult = st.text_input(label="Input your insult 👇", value=insults[1])
+    with icol2: generate_button = st.button('🤖 Generate Comeback ')
+    if generate_button: st.session_state.fire_flag = True
+
 
     placeholder_a = st.empty()
 
@@ -91,9 +99,10 @@ def main():
             st.session_state.fire_flag = False
 
     st.write("")
-    st.markdown("---")
+ 
 
     if st.session_state.zingers:
+        st.markdown("---")
         st.write('Hurt by a savage zinger? Share it in the burn book 💔')
         with st.expander("Open Burnbook", expanded=False):
             # if insult not in example_insults
@@ -117,7 +126,18 @@ def main():
     st.write("")
     st.write(f'API count = `{st.session_state.count}`')
 
-
+    # Custom button colours
+    m = st.markdown("""
+            <style>
+            div.stButton > button:first-child {
+                background-color: #0099ff;
+                color:#ffffff;
+            }
+            div.stButton > button:hover {
+                background-color: #00ff00;
+                color:#ff0000;
+                }
+            </style>""", unsafe_allow_html=True)
 
 if __name__ == '__main__':
     st.set_page_config(page_title="Insult Sword Fighting",
