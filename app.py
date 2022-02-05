@@ -61,7 +61,7 @@ def main():
     # Hack for centering image
     pcol1, pcol2, pcol3 = st.columns([1,3,1])
     with pcol1: st.write("")
-    with pcol2: st.image('media/splash_header_small.png')
+    with pcol2: st.image('media/splash_header_small.PNG')
     with pcol3: st.write("")
 
     st.markdown("<h2 style='text-align: center;'>Insult Sword Fighting</h2>", unsafe_allow_html=True)
