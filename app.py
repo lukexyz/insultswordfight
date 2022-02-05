@@ -19,9 +19,14 @@ def fight(insult, client, df):
         st.session_state.zingers = generate_comeback(insult, client, df, outputs, training_examples)
         st.session_state.count += outputs
 
-    st.write(f'Insult: ☠️ {insult} ☠️\n')
-    for zinger in st.session_state.zingers:
-        st.write(f"\tComeback: `{zinger}` 🔥🔥🔥\n")
+    ecol1, ecol2 = st.columns([2,12])
+    with ecol1: st.image('media/guybrush-threepwood50.gif')
+
+    with ecol2: 
+        st.write(f'Insult: ☠️ {insult} \n')
+        for zinger in st.session_state.zingers:
+            st.write(f"\tComeback 🤖: `{zinger}` 🔥🔥🔥\n")
+
 
 
 def burn_book():
@@ -86,7 +91,7 @@ def main():
                 "This girl is the nastiest skank bitch I've ever met"]
 
     icol1, icol2 = st.columns([5,1])
-    with icol1: insult = st.text_input(label="Input your insult 👇", value=insults[1])
+    with icol1: insult = st.text_input(label="👇 Input your insult", value=insults[1])
     with icol2: generate_button = st.button('🤖 Generate Comeback ')
     if generate_button: st.session_state.fire_flag = True
 
@@ -98,22 +103,24 @@ def main():
             fight(insult, client, df)
             st.session_state.fire_flag = False
 
+
     st.write("")
  
 
     if st.session_state.zingers:
         st.markdown("---")
-        st.write('Hurt by a savage zinger? Share it in the burn book 💔')
+        st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? We're here to help.</i></p1>", unsafe_allow_html=True)
+        st.markdown("<h3 style='text-align: right; color: black;'> Share it in the burn book 💔 </h3>", unsafe_allow_html=True)
         with st.expander("Open Burnbook", expanded=False):
             # if insult not in example_insults
             zinger = st.session_state.zingers
 
             if zinger:
-                st.write(f'Insult: ☠️ {insult} ☠️\n')
+                st.write(f'Insult: ☠️ {insult}\n')
                 if st.session_state.zingers[0]:
-                    st.write(f'\tComeback: `{zinger}` 🔥🔥🔥\n')
+                    st.write(f'\tComeback 🤖: `{zinger}` 🔥🔥🔥\n')
                     if st.button('+ add to burn book'):
-                        data = {'time_utc':utc_now(), 'insult':f"☠️ {insult} ☠️",
+                        data = {'time_utc':utc_now(), 'insult':f"☠️ {insult}",
                                 'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
                         bb = insert_row(bb, data, dbpath)
             else: st.write('Generate zinger above')
