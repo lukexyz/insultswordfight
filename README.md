@@ -1,11 +1,10 @@
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/splash_header_small.PNG" width=100%> 
+  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/Vertical_Intro_Splash_3.jpg" width=70%> 
 </p>  
 
-#### Online Demo 🔗
-## [🏴‍☠️ www.pirateinsults.com](https://github.com/lukexyz/insultswordfight/blob/master/app.py) 
+## Online Demo: [ www.pirateinsults.com 🏴‍☠️](https://github.com/lukexyz/insultswordfight/blob/master/app.py) 
 <br />
 
 ## Generated zingers 🍒
