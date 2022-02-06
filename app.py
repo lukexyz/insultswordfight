@@ -56,6 +56,7 @@ def main():
         st.session_state.fire_flag = False
         st.session_state.burn_book_flag = False
         st.session_state.zingers = []
+        st.session_state.page_nav = "frontpage"
 
     # --------------------------- header  -------------------------- #
     # Hack for centering image
@@ -64,89 +65,105 @@ def main():
     with pcol2: st.image('media/Vertical_Intro_Splash_3.jpg')
     with pcol3: st.write("")
 
-    st.markdown("<h2 style='text-align: center;'>Insult Sword Fighting</h2>", unsafe_allow_html=True)
-    st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
 
 
-    # --------------------------- header  -------------------------- #
-    df = get_insult_data()
-    with st.expander("Learn more about Monkey Island 🌄", expanded=False):
-        st.write("`Insult Sword Fighting` is a puzzle from the 1990 video game [Monkey Island](https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting). As you progress through the game you learn more insults, and win fights by using the right comeback at the right time.")
-        ecol1, ecol2, ecol3 = st.columns([1,4,1])
-        with ecol1: st.write("")
-        with ecol2: st.image('media/The_Making_of_Monkey_Island_30th_Anniversary_Documentary_cropped.gif')
-        with ecol3: st.write("")
-        st.write("This webpage allows you submit a insult, and will automatically generate a devastating comeback that will leave you broken and afraid. For example,")
-        st.write("\t☠️ Insult: I once owned a dog that was smarter than you. ☠️")
-        st.write("\t`Comeback: (0) I hope you lost him.` 🔥🔥🔥")
-        st.write('Here are some of the original insult-comback pairs (from the game), which form the training dataset.')
-        rows = st.slider('How many training examples to display?', 1, 15, 5)
-        st.table(df.head(rows))
-        st.write("`You can try using some of these insults to get started, but it's more fun coming up with your own!` 💅")
+    if st.session_state.page_nav == "frontpage":
+        st.markdown("<h2 style='text-align: center;'>Insult Sword Fighting</h2>", unsafe_allow_html=True)
+        st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
+        # --------------------------- header  -------------------------- #
+        df = get_insult_data()
+        with st.expander("Learn more about Monkey Island 🌄", expanded=False):
+            st.write("`Insult Sword Fighting` is a puzzle from the 1990 video game [Monkey Island](https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting). As you progress through the game you learn more insults, and win fights by using the right comeback at the right time.")
+            ecol1, ecol2, ecol3 = st.columns([1,4,1])
+            with ecol1: st.write("")
+            with ecol2: st.image('media/The_Making_of_Monkey_Island_30th_Anniversary_Documentary_cropped.gif')
+            with ecol3: st.write("")
+            st.write("This webpage allows you submit a insult, and will automatically generate a devastating comeback that will leave you broken and afraid. For example,")
+            
+            pcol1, pcol2, pcol3 = st.columns([1,3,1])
+            with pcol1: st.write("")
+            with pcol2: st.image('media/hurt_feelings.JPG')
+            with pcol3: st.write("")
+            
+            st.write('Here are some of the original insult-comback pairs (from the game), which form the training dataset.')
+            rows = st.slider('How many training examples to display?', 1, 15, 5)
+            st.table(df.head(rows))
+            st.write("`You can try using some of these insults to get started, but it's more fun coming up with your own!` 💅")
 
-    st.write("")
-    client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
-    df = get_insult_data()
+        st.write("")
+        client = nlpcloud.Client("gpt-j", st.secrets["nlpcloud_token"], gpu=True)
+        df = get_insult_data()
 
-    insults = [ "test insult", 
-                "I've seen better moves in a senior citizen Zumba class!",
-                "This girl is the nastiest skank bitch I've ever met"]
+        insults = [ "test insult", 
+                    "I've seen better moves in a senior citizen Zumba class!",
+                    "This girl is the nastiest skank bitch I've ever met"]
 
-    icol1, icol2 = st.columns([5,1])
-    with icol1: insult = st.text_input(label="👇 Type your insult", value=insults[1])
-    with icol2: generate_button = st.button('🤖 Generate Comeback ')
-    if generate_button: st.session_state.fire_flag = True
-
-
-    placeholder_a = st.empty()
-
-    if st.session_state.fire_flag == True:
-        with placeholder_a.container():
-            fight(insult, client, df)
-            st.session_state.fire_flag = False
+        icol1, icol2 = st.columns([5,1])
+        with icol1: insult = st.text_input(label="👇 Type your insult", value=insults[1])
+        with icol2: generate_button = st.button('🤖 Generate Comeback ')
+        if generate_button: st.session_state.fire_flag = True
 
 
-    st.write("")
- 
+        placeholder_a = st.empty()
 
-    if st.session_state.zingers:
-        st.markdown("---")
-        st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? We're here to help.</i></p1>", unsafe_allow_html=True)
-        st.markdown("<h3 style='text-align: right; color: black;'> Share it in the burn book 💔 </h3>", unsafe_allow_html=True)
-        with st.expander("Open Burnbook", expanded=False):
-            # if insult not in example_insults
-            zinger = st.session_state.zingers
+        if st.session_state.fire_flag == True:
+            with placeholder_a.container():
+                fight(insult, client, df)
+                st.session_state.fire_flag = False
 
-            if zinger:
-                st.write(f'Insult: ☠️ {insult}\n')
-                if st.session_state.zingers[0]:
-                    st.write(f'\tComeback 🤖: `{zinger}` 🔥🔥🔥\n')
-                    if st.button('+ add to burn book'):
-                        data = {'time_utc':utc_now(), 'insult':f"☠️ {insult}",
-                                'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
-                        bb = insert_row(bb, data, dbpath)
-            else: st.write('Generate zinger above')
 
-            st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
-    # -------------------------------------------------------- #
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write("")
-    st.write(f'API count = `{st.session_state.count}`')
+        st.write("")
+    
 
-    # Custom button colours
-    m = st.markdown("""
-            <style>
-            div.stButton > button:first-child {
-                background-color: #0099ff;
-                color:#ffffff;
-            }
-            div.stButton > button:hover {
-                background-color: #00ff00;
-                color:#ff0000;
+        if st.session_state.zingers:
+            st.markdown("---")
+            st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? We're here to help.</i></p1>", unsafe_allow_html=True)
+            st.markdown("<h3 style='text-align: right; color: black;'> Share it in the burn book 💔 </h3>", unsafe_allow_html=True)
+            with st.expander("Open Burnbook", expanded=False):
+                # if insult not in example_insults
+                zinger = st.session_state.zingers
+
+                if zinger:
+                    st.write(f'Insult: ☠️ {insult}\n')
+                    if st.session_state.zingers[0]:
+                        st.write(f'\tComeback 🤖: `{zinger}` 🔥🔥🔥\n')
+                        if st.button('+ add to burn book'):
+                            data = {'time_utc':utc_now(), 'insult':f"☠️ {insult}",
+                                    'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
+                            bb = insert_row(bb, data, dbpath)
+                else: st.write('Generate zinger above')
+
+                st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
+                if st.button('Go to burnbook'):
+                    st.session_state.page_nav = "burnbook"
+
+        # -------------------------------------------------------- #
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write("")
+        st.write(f'API count = `{st.session_state.count}`')
+
+        # Custom button colours
+        m = st.markdown("""
+                <style>
+                div.stButton > button:first-child {
+                    background-color: #0099ff;
+                    color:#ffffff;
                 }
-            </style>""", unsafe_allow_html=True)
+                div.stButton > button:hover {
+                    background-color: #00ff00;
+                    color:#ff0000;
+                    }
+                </style>""", unsafe_allow_html=True)
+
+    elif st.session_state.page_nav == "burnbook":
+        st.markdown("<h2 style='text-align: center;'>All Secrets of the Burn Book</h2>", unsafe_allow_html=True)
+        st.write('"With great power, comes great responsibility" - The Swordmaster')
+        st.table(readable_df(bb, max_rows=20)[['human_time', 'insult', 'comeback']][::-1])
+        if st.button('Back to Frontpage'): 
+            st.session_state.page_nav = "frontpage"
+            
 
 if __name__ == '__main__':
     st.set_page_config(page_title="Insult Sword Fighting",

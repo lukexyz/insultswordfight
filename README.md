@@ -1,10 +1,10 @@
-
-
 <p align="center">
   <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/Vertical_Intro_Splash_3.jpg" width=50%> 
 </p>  
 
-## Online Demo: [ www.pirateinsults.com 🏴‍☠️](https://github.com/lukexyz/insultswordfight/blob/master/app.py) 
+## Online here [ www.pirateinsults.com 🏴‍☠️](https://pirateinsults.com) 
+
+Built with [streamlit](streamlit.io) and `NPT-J` using few shot learning with [nlpcloud](nlpcloud.io).
 <br />
 
 ## Generated zingers 🍒

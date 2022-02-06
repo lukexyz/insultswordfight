@@ -5,3 +5,4 @@ nlpcloud
 streamlit==1.2.0
 prodb==0.0.4
 arrow
+streamlit-autorefresh
