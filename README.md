@@ -1,7 +1,7 @@
 
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/Vertical_Intro_Splash_3.jpg" width=70%> 
+  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/Vertical_Intro_Splash_3.jpg" width=50%> 
 </p>  
 
 ## Online Demo: [ www.pirateinsults.com 🏴‍☠️](https://github.com/lukexyz/insultswordfight/blob/master/app.py) 
