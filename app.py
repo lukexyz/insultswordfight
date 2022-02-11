@@ -62,7 +62,7 @@ def main():
     with pcol3: st.write("")
 
     if st.session_state.page_nav == "frontpage":
-        st.markdown("<h2 style='text-align: center;'>Insult Sword Fighting</h2>", unsafe_allow_html=True)
+        st.markdown("<h2 style='text-align: center;'>Insult Sword Fighter</h2>", unsafe_allow_html=True)
         st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
         # --------------------------- header  -------------------------- #
         df = get_insult_data()
@@ -109,14 +109,13 @@ def main():
 
         if st.session_state.zingers:
             st.markdown("---")
+
             st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? We're here to help.</i></p1>", unsafe_allow_html=True)
-            
-            st.markdown("<h5 style='text-align: right; color: black;'> Share it in the burn book 💔 </h5>", unsafe_allow_html=True)
-            
+            #st.markdown("<h6 style='text-align: right; color: black;'>💔 Share in the Burnbook 💔</h6>", unsafe_allow_html=True)
+        
             with st.expander("Open Burnbook", expanded=False):
                 # if insult not in example_insults
                 zinger = st.session_state.zingers
-
                 if zinger:
                     st.write(f'Insult: ☠️ {insult}\n')
                     if st.session_state.zingers[0]:
@@ -126,10 +125,13 @@ def main():
                                     'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
                             bb = insert_row(bb, data, dbpath)
 
-                else: st.write('Generate zinger above')
+                    else: st.write('Generate zinger above')
                 st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
-                if st.button('🖱️🖱️ Double Click for Burnbook'):
-                    st.session_state.page_nav = "burnbook"
+                bzcol1, bzcol2 = st.columns([10, 4])
+                with bzcol2: st.image('media/burnbook_img.png', width=160)
+                with bzcol1: 
+                    if st.button('🖱️🖱️ Double Click to view Burnbook'):
+                        st.session_state.page_nav = "burnbook"
 
         # -------------------------------------------------------- #
         st.write("")
@@ -162,8 +164,30 @@ def main():
             
 
 if __name__ == '__main__':
-    st.set_page_config(page_title="Insult Sword Fighting",
+    st.set_page_config(page_title="Insult Sword Fighter",
         page_icon="☠️",
         layout="centered",
         initial_sidebar_state="auto")
+
+    # Remove streamlit boilerplate
+    hide_streamlit_style = """
+        <style>
+        /* This is to hide hamburger menu completely */
+        #MainMenu {visibility: hidden;}
+        /* This is to hide Streamlit footer */
+        footer {visibility: hidden;}
+        /*
+        If you did not hide the hamburger menu completely,
+        you can use the following styles to control which items on the menu to hide.
+        */
+        ul[data-testid=main-menu-list] > li:nth-of-type(4), /* Documentation */
+        ul[data-testid=main-menu-list] > li:nth-of-type(5), /* Ask a question */
+        ul[data-testid=main-menu-list] > li:nth-of-type(6), /* Report a bug */
+        ul[data-testid=main-menu-list] > li:nth-of-type(7), /* Streamlit for Teams */
+        ul[data-testid=main-menu-list] > div:nth-of-type(2) /* 2nd divider */
+            {display: none;}
+        </style>
+    """
+    st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
     main()
