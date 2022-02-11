@@ -141,7 +141,9 @@ def main():
         st.write("")
         st.write("")
         st.write("")
-        st.write(f'API count = `{st.session_state.count}`')
+        f1, f2 = st.columns((4,1))
+        f2.write("Source 🌐 [Github](https://github.com/lukexyz/insultswordfight)")
+        #st.write(f'API count = `{st.session_state.count}`')
 
         # Custom button colours
         m = st.markdown("""

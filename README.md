@@ -1,26 +1,27 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/Vertical_Intro_Splash_3.jpg" width=50%> 
-</p>  
+</p>
 
-## Online here [ www.pirateinsults.com 🏴‍☠️](https://pirateinsults.com) 
+## Online here [ www.pirateinsults.com 🏴‍☠️](https://pirateinsults.com)
 
-Built with [streamlit](streamlit.io) and `NPT-J` using few shot learning with [nlpcloud](nlpcloud.io).
+Built with [streamlit](streamlit.io) and `GPT-J` using few shot learning with [nlpcloud](nlpcloud.io).
 <br />
 
 ## Generated zingers 🍒
 
 ☠️ Insult: I once owned a dog that was smarter than you. ☠️  
-`Comeback: (0) I hope you lost him.` 🔥🔥🔥   
+`Comeback: (0) I hope you lost him.` 🔥🔥🔥
 
 ☠️ Insult: Heaven preserve me! You look like something that's died! ☠️  
-`Comeback: (0)  If you ever need an autopsy, I'd be glad to do it.`  🔥🔥🔥   
+`Comeback: (0) If you ever need an autopsy, I'd be glad to do it.` 🔥🔥🔥
 
 ☠️ Insult: Killing you would be justifiable homicide! ☠️  
-`Comeback: (0)  Unless it was murder, then you'd be guilty of suicide.` 🔥🔥🔥   
+`Comeback: (0) Unless it was murder, then you'd be guilty of suicide.` 🔥🔥🔥  
 <br />
 
 ## Few Shot Learning
-Using the monkey island insult database, I create a text block showing the examples which I want the model to emulate. In this case, it's 3 pairs of `insult`: `comeback` pairs. 
+
+Using the monkey island insult database, I create a text block showing the examples which I want the model to emulate. In this case, it's 3 pairs of `insult`: `comeback` pairs.
 
 The final portion is the user input `insult`, and then the non-closure text "`comeback: `". This gives the language model no other option but to reply with what it thinks is the most appropriate response.
 
@@ -47,66 +48,72 @@ generation = client.generation("""Insult: You fight like a dairy Farmer!
 
 print('\n🔥🔥🔥 ', generation["generated_text"])
 ```
+
 ## Development Notebook using `GPT-J`
+
 > :bookmark_tabs: [zingers_GPT-J.ipynb](https://github.com/lukexyz/insultswordfight/blob/master/notebooks/00_zingers_GPT-J.ipynb)
 
 ## Online Demo
 
-Streamlit script  
+Streamlit script
+
 > :bookmark_tabs: [app.py](https://github.com/lukexyz/insultswordfight/blob/master/app.py)
 
-The web app is running online at [pirateinsults.com](http://pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish. 
+The web app is running online at [pirateinsults.com](http://pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish.
 
-The web app is created with streamlit, hosted (free) by streamlit.io, but I've created a blind redirect from my custom domain [pirateinsults.com](http://pirateinsults.com) to go to the internal streamlit IP they gave me. 
+The web app is created with streamlit, hosted (free) by streamlit.io, but I've created a blind redirect from my custom domain [pirateinsults.com](http://pirateinsults.com) to go to the internal streamlit IP they gave me.
 
 <br />
 
 ## References
+
 ISF at Monkey Island Fandom 🐒  
 → https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting  
-→ https://strategywiki.org/wiki/The_Secret_of_Monkey_Island/Sword-Fighting_Insults  
+→ https://strategywiki.org/wiki/The_Secret_of_Monkey_Island/Sword-Fighting_Insults
 
 GPT-Neo  
-→ https://huggingface.co/blog/few-shot-learning-gpt-neo-and-inference-api  
+→ https://huggingface.co/blog/few-shot-learning-gpt-neo-and-inference-api
 
 OpenAI GPT-3 Playground  
-→ https://beta.openai.com/playground/p/oahgFuR1ABeP2h8zO32caUNf  
+→ https://beta.openai.com/playground/p/oahgFuR1ABeP2h8zO32caUNf
 
 Effectively using GPT-J and GPT-Neo, the GPT-3 open-source alternatives, with few-shot learning  
-→ https://nlpcloud.io/effectively-using-gpt-j-gpt-neo-gpt-3-alternatives-few-shot-learning.html  
+→ https://nlpcloud.io/effectively-using-gpt-j-gpt-neo-gpt-3-alternatives-few-shot-learning.html
 
 Thanks for a lot of the insults gameplay coming from Orson Scott Card and his children for coming up with the originial insults! (https://youtu.be/xgqEneDNQto?t=3469)
 
 <p align="center">
   <img src="https://github.com/lukexyz/insultswordfight/blob/master/media/transformer.png?raw=true" width=80%> 
-</p>  
+</p>
 
 [/u/crumpuppet](https://www.reddit.com/r/MonkeyIsland/comments/if1wcs/i_made_a_monkey_island_sword_fighting_insult)
 
 ## Setup develoment environment with `nbdev`
 
-* Ubuntu / WSL
+- Ubuntu / WSL
+
 ```
 conda create -n swordfight python=3.9 jupyter twine
-conda activate swordfight  
+conda activate swordfight
 pip install nbdev
-git clone https://github.com/lukexyz/insultswordfight.git  
-pip install -r requirements.txt  
+git clone https://github.com/lukexyz/insultswordfight.git
+pip install -r requirements.txt
 ```
-  
-  
-* Install githooks from project folder  
+
+- Install githooks from project folder
+
 ```
 nbdev_install_git_hooks
 ```
 
+### Nbdev commands
 
-### Nbdev commands  
+#### 1. 🏗️ **Build lib** from notebooks
 
-#### 1. 🏗️ **Build lib** from notebooks  
-> `nbdev_build_lib` 
+> `nbdev_build_lib`
 
-#### 2. 📝 **Build docs** from notebooks  
-> `nbdev_build_docs` 
+#### 2. 📝 **Build docs** from notebooks
 
-> Image generated by [/u/crumpuppet](https://www.reddit.com/r/MonkeyIsland/comments/if1wcs/i_made_a_monkey_island_sword_fighting_insult).  
+> `nbdev_build_docs`
+
+> Image generated by [/u/crumpuppet](https://www.reddit.com/r/MonkeyIsland/comments/if1wcs/i_made_a_monkey_island_sword_fighting_insult).
