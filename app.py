@@ -39,7 +39,6 @@ def burn_book():
 
 
 def main():
-
     # -------------------- initialize burn book -------------------- #
     dbpath = 'bb.csv'
     if not os.path.isfile(dbpath): 
@@ -56,30 +55,34 @@ def main():
 
     # --------------------------- header  -------------------------- #
     # Hack for centering image
-    pcol1, pcol2, pcol3 = st.columns([1,3,1])
+    pcol1, pcol2, pcol3 = st.columns([1,4,1])
     with pcol1: st.write("")
     with pcol2: st.image('media/Vertical_Intro_Splash_3.jpg')
     with pcol3: st.write("")
 
     if st.session_state.page_nav == "frontpage":
-        st.markdown("<h2 style='text-align: center;'>Insult Sword Fighter</h2>", unsafe_allow_html=True)
-        st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
+        #st.markdown("<h2 style='text-align: center;'>Insult Sword Fighting</h2>", unsafe_allow_html=True)
+        gcol1, gcol2, gcol3 = st.columns([1,1,1])
+        with gcol1: st.write("")
+        with gcol2: st.write("`Pirates` ☠️ vs. 🤖 `GPT-J`") 
+        with gcol3: st.write("")
+        
         # --------------------------- header  -------------------------- #
         df = get_insult_data()
-        with st.expander("Learn more about Monkey Island 🌄", expanded=False):
-            st.write("`Insult Sword Fighting` is a puzzle from the 1990 video game [Monkey Island](https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting). As you progress through the game you learn more insults, and win fights by using the right comeback at the right time.")
+        with st.expander("Monkey Island? Insult Sword Fighting? 🌄", expanded=False):
+            st.write("`Insult Sword Fighting` is a puzzle from the 1990 video game [Monkey Island](https://monkeyisland.fandom.com/wiki/Insult_Sword_Fighting). Throughout the game you learn new insults, and win fights by using the right comeback at the right time.")
             ecol1, ecol2, ecol3 = st.columns([1,4,1])
             with ecol1: st.write("")
             with ecol2: st.image('media/The_Making_of_Monkey_Island_30th_Anniversary_Documentary_cropped.gif')
             with ecol3: st.write("")
-            st.write("This webpage allows you submit a insult, and will automatically generate a devastating comeback that will leave you broken and afraid. For example,")
+            st.write("Below you can submit an insult, and the app will generate a devastating comeback that will leave you broken and afraid. For example,")
             
             pcol1, pcol2, pcol3 = st.columns([1,3,1])
             with pcol1: st.write("")
             with pcol2: st.image('media/hurt_feelings.JPG')
             with pcol3: st.write("")
             
-            st.write('Here are some of the original insult-comback pairs (from the game), which form the training dataset.')
+            st.write('Here are some of the original insult-comback pairs from the game. These form the training dataset using [few-shot learning](https://nlpcloud.io/effectively-using-gpt-j-gpt-neo-gpt-3-alternatives-few-shot-learning.html) and the [GPT-J language model](https://huggingface.co/EleutherAI/gpt-j-6B).')
             rows = st.slider('How many training examples to display?', 1, 15, 5)
             st.table(df.head(rows))
             st.write("`You can try using some of these insults to get started, but it's more fun coming up with your own!` 💅")
@@ -97,11 +100,12 @@ def main():
         with icol2: generate_button = st.button('🤖 Generate Comeback ')
         if generate_button: st.session_state.fire_flag = True
 
-
         placeholder_a = st.empty()
 
         if st.session_state.fire_flag == True:
             with placeholder_a.container():
+                if any(word in insult.lower() for word in st.secrets["banned_words"].split()): 
+                    insult = "I am an asshole"
                 fight(insult, client, df)
                 st.session_state.fire_flag = False
 
@@ -109,10 +113,8 @@ def main():
 
         if st.session_state.zingers:
             st.markdown("---")
-
             st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? We're here to help.</i></p1>", unsafe_allow_html=True)
-            #st.markdown("<h6 style='text-align: right; color: black;'>💔 Share in the Burnbook 💔</h6>", unsafe_allow_html=True)
-        
+
             with st.expander("Open Burnbook", expanded=False):
                 # if insult not in example_insults
                 zinger = st.session_state.zingers
@@ -120,13 +122,13 @@ def main():
                     st.write(f'Insult: ☠️ {insult}\n')
                     if st.session_state.zingers[0]:
                         st.write(f'\tComeback 🤖: `{zinger}` 🔥🔥🔥\n')
-                        if st.button('+ add to burn book'):
-                            data = {'time_utc':utc_now(), 'insult':f"☠️ {insult}",
+                        if st.button('+ add to burn book 🍒'):
+                            data = {'time_utc':utc_now(), 'insult':f"{insult}",
                                     'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
                             bb = insert_row(bb, data, dbpath)
 
                     else: st.write('Generate zinger above')
-                st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
+                st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1].head())
                 bzcol1, bzcol2 = st.columns([10, 4])
                 with bzcol2: st.image('media/burnbook_img.png', width=160)
                 with bzcol1: 
@@ -157,7 +159,7 @@ def main():
         st.markdown("<h2 style='text-align: center;'>Secrets from the Burn Book</h2>", unsafe_allow_html=True)
         bcol1, bcol2 = st.columns([12, 3])
         with bcol2: st.image('media/burnbook_img.png', width=120)
-        with bcol1: st.warning('"With great power, comes great responsibility" - The Swordmaster')
+        with bcol1: st.warning('"With great power, comes great responsibility" - Mêlée Island Sword Master')
         st.table(readable_df(bb, max_rows=20)[['human_time', 'insult', 'comeback']][::-1])
         if st.button('🖱️🖱️ Double Click for Frontpage'): 
             st.session_state.page_nav = "frontpage"
@@ -191,6 +193,7 @@ if __name__ == '__main__':
     """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
 
+    # Remove padding from top of page
     padding = 0
     st.markdown(f""" <style>
         .reportview-container .main .block-container{{
