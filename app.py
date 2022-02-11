@@ -22,11 +22,10 @@ def fight(insult, client, df):
     ecol1, ecol2 = st.columns([2,12])
     with ecol1: st.image('media/guybrush-threepwood50.gif')
 
-    with ecol2: 
+    with ecol2:
         st.write(f'Insult: ☠️ {insult} \n')
         for zinger in st.session_state.zingers:
             st.write(f"\tComeback 🤖: `{zinger}` 🔥🔥🔥\n")
-
 
 
 def burn_book():
@@ -37,9 +36,6 @@ def burn_book():
             submit_form = st.form_submit_button(label='Submit')
             if submit_form: 
                 st.balloons()
-
-
-
 
 
 def main():
@@ -64,8 +60,6 @@ def main():
     with pcol1: st.write("")
     with pcol2: st.image('media/Vertical_Intro_Splash_3.jpg')
     with pcol3: st.write("")
-
-
 
     if st.session_state.page_nav == "frontpage":
         st.markdown("<h2 style='text-align: center;'>Insult Sword Fighting</h2>", unsafe_allow_html=True)
@@ -111,14 +105,14 @@ def main():
                 fight(insult, client, df)
                 st.session_state.fire_flag = False
 
-
         st.write("")
-    
 
         if st.session_state.zingers:
             st.markdown("---")
             st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? We're here to help.</i></p1>", unsafe_allow_html=True)
-            st.markdown("<h3 style='text-align: right; color: black;'> Share it in the burn book 💔 </h3>", unsafe_allow_html=True)
+            
+            st.markdown("<h5 style='text-align: right; color: black;'> Share it in the burn book 💔 </h5>", unsafe_allow_html=True)
+            
             with st.expander("Open Burnbook", expanded=False):
                 # if insult not in example_insults
                 zinger = st.session_state.zingers
@@ -134,6 +128,7 @@ def main():
                 else: st.write('Generate zinger above')
 
                 st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
+                st.caption('Latest additions to the burn book.')
                 if st.button('Go to burnbook'):
                     st.session_state.page_nav = "burnbook"
 
@@ -148,18 +143,20 @@ def main():
         m = st.markdown("""
                 <style>
                 div.stButton > button:first-child {
-                    background-color: #0099ff;
+                    background-color: #1F43B2;
                     color:#ffffff;
                 }
                 div.stButton > button:hover {
-                    background-color: #00ff00;
-                    color:#ff0000;
+                    background-color: #FF5FFD;
+                    color: #000000;
                     }
                 </style>""", unsafe_allow_html=True)
 
     elif st.session_state.page_nav == "burnbook":
-        st.markdown("<h2 style='text-align: center;'>All Secrets of the Burn Book</h2>", unsafe_allow_html=True)
-        st.write('"With great power, comes great responsibility" - The Swordmaster')
+        st.markdown("<h2 style='text-align: center;'>Secrets from the Burn Book</h2>", unsafe_allow_html=True)
+        bcol1, bcol2 = st.columns([12, 3])
+        with bcol2: st.image('media/burnbook_img.png', width=120)
+        with bcol1: st.warning('"With great power, comes great responsibility" - The Swordmaster')
         st.table(readable_df(bb, max_rows=20)[['human_time', 'insult', 'comeback']][::-1])
         if st.button('Back to Frontpage'): 
             st.session_state.page_nav = "frontpage"
