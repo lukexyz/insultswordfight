@@ -161,6 +161,7 @@ def main():
         st.table(readable_df(bb, max_rows=20)[['human_time', 'insult', 'comeback']][::-1])
         if st.button('🖱️🖱️ Double Click for Frontpage'): 
             st.session_state.page_nav = "frontpage"
+            st.session_state.zingers = []
             
 
 if __name__ == '__main__':
@@ -189,5 +190,11 @@ if __name__ == '__main__':
         </style>
     """
     st.markdown(hide_streamlit_style, unsafe_allow_html=True)
+
+    padding = 0
+    st.markdown(f""" <style>
+        .reportview-container .main .block-container{{
+            padding-top: {padding}rem;
+        }} </style> """, unsafe_allow_html=True)
 
     main()
