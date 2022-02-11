@@ -125,11 +125,10 @@ def main():
                             data = {'time_utc':utc_now(), 'insult':f"☠️ {insult}",
                                     'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
                             bb = insert_row(bb, data, dbpath)
-                else: st.write('Generate zinger above')
 
+                else: st.write('Generate zinger above')
                 st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1])
-                st.caption('Latest additions to the burn book.')
-                if st.button('Go to burnbook'):
+                if st.button('🖱️🖱️ Double Click for Burnbook'):
                     st.session_state.page_nav = "burnbook"
 
         # -------------------------------------------------------- #
@@ -158,7 +157,7 @@ def main():
         with bcol2: st.image('media/burnbook_img.png', width=120)
         with bcol1: st.warning('"With great power, comes great responsibility" - The Swordmaster')
         st.table(readable_df(bb, max_rows=20)[['human_time', 'insult', 'comeback']][::-1])
-        if st.button('Back to Frontpage'): 
+        if st.button('🖱️🖱️ Double Click for Frontpage'): 
             st.session_state.page_nav = "frontpage"
             
 
