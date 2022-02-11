@@ -82,7 +82,7 @@ def main():
             with pcol2: st.image('media/hurt_feelings.JPG')
             with pcol3: st.write("")
             
-            st.write('Here are some of the original insult-comback pairs from the game. These form the training dataset using [few-shot learning](https://nlpcloud.io/effectively-using-gpt-j-gpt-neo-gpt-3-alternatives-few-shot-learning.html) and the [GPT-J language model](https://huggingface.co/EleutherAI/gpt-j-6B).')
+            st.write('Here are some of the original `Insult : Comeback` pairs from the game. These form the training dataset using [few-shot learning](https://nlpcloud.io/effectively-using-gpt-j-gpt-neo-gpt-3-alternatives-few-shot-learning.html) and the [GPT-J language model](https://huggingface.co/EleutherAI/gpt-j-6B).')
             rows = st.slider('How many training examples to display?', 1, 15, 5)
             st.table(df.head(rows))
             st.write("`You can try using some of these insults to get started, but it's more fun coming up with your own!` 💅")
@@ -92,6 +92,7 @@ def main():
         df = get_insult_data()
 
         insults = [ "test insult", 
+                    "My great grandmother can fight better than you!",
                     "I've seen better moves in a senior citizen Zumba class!",
                     "This girl is the nastiest skank bitch I've ever met"]
 
@@ -128,7 +129,7 @@ def main():
                             bb = insert_row(bb, data, dbpath)
 
                     else: st.write('Generate zinger above')
-                st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1].head())
+                st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1].head(3))
                 bzcol1, bzcol2 = st.columns([10, 4])
                 with bzcol2: st.image('media/burnbook_img.png', width=160)
                 with bzcol1: 
@@ -160,7 +161,7 @@ def main():
         bcol1, bcol2 = st.columns([12, 3])
         with bcol2: st.image('media/burnbook_img.png', width=120)
         with bcol1: st.warning('"With great power, comes great responsibility" - Mêlée Island Sword Master')
-        st.table(readable_df(bb, max_rows=20)[['human_time', 'insult', 'comeback']][::-1])
+        st.table(readable_df(bb, max_rows=20)[['human_time', 'insult', 'comeback']][::-1].head(20))
         if st.button('🖱️🖱️ Double Click for Frontpage'): 
             st.session_state.page_nav = "frontpage"
             st.session_state.zingers = []
