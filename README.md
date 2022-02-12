@@ -1,13 +1,10 @@
-
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/full_screenshot1_border.PNG" width=60%> 
-  <h1 align="center">🏴‍
-  <a href="https://pirateinsults.com">Insult Sword Fighting</a> 🏴‍</h1>
-  
+  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/splash_header_3_small.jpg" width=60%> 
+  <h1 align="center">☠️ <a href="https://pirateinsults.com">Insult Sword Fighting</a> ☠️</h1>
 </p>
 
 <p align="center">
-Online demo <a href="https://pirateinsults.com">www.pirateinsults.com</a> 🔗
+<a href="https://pirateinsults.com">www.pirateinsults.com</a> 
 </p>
 
 <br></br> 
@@ -24,6 +21,10 @@ Built with [streamlit](streamlit.io) and `GPT-J` using few shot learning with [n
 ☠️ Insult: Killing you would be justifiable homicide! ☠️  
 `Comeback: (0) Unless it was murder, then you'd be guilty of suicide.` 🔥🔥🔥  
 <br />
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/grandma_insult.PNG" width=60%>  
+</p>
 
 ## Few Shot Learning
 
@@ -59,17 +60,26 @@ print('\n🔥🔥🔥 ', generation["generated_text"])
 
 > :bookmark_tabs: [zingers_GPT-J.ipynb](https://github.com/lukexyz/insultswordfight/blob/master/notebooks/00_zingers_GPT-J.ipynb)
 
-## Online Demo
-
+## Online App
 Streamlit script
 
 > :bookmark_tabs: [app.py](https://github.com/lukexyz/insultswordfight/blob/master/app.py)
 
 The web app is running online at [pirateinsults.com](http://pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish.
 
-The web app is created with streamlit, hosted (free) by streamlit.io, but I've created a blind redirect from my custom domain [pirateinsults.com](http://pirateinsults.com) to go to the internal streamlit IP they gave me.
+The web app is created with streamlit, hosted (free) by streamlit.io, and I've created a blind redirect for a custom domain [pirateinsults.com](http://pirateinsults.com) to go to the internal streamlit IP they gave me.
 
-<br />
+
+<p align="center">
+<a href="https://pirateinsults.com">www.pirateinsults.com</a> 
+</p>
+<p align="center">
+  <a href="https://pirateinsults.com">
+  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/full_screenshot1_border.PNG" width=50%> 
+  </a>
+</p>
+
+
 
 ## References
 
