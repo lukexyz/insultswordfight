@@ -115,10 +115,10 @@ def main():
         if st.session_state.zingers:
             st.markdown("---")
             st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? Share it in the burn book.</i></p1>", unsafe_allow_html=True)
-            if st.session_state.count == 1: # pro UX move
-                with st.spinner('Fetching burn book...'):
-                    time.sleep(3)
-            with st.expander("burn book", expanded=True):
+            if st.session_state.count > 1: # pro UX move
+                expand = True
+            else: expand = False
+            with st.expander("Open burn book", expanded=expand):
                 # if insult not in example_insults
                 zinger = st.session_state.zingers
                 if zinger:
@@ -127,7 +127,7 @@ def main():
                         st.write(f'\tComeback 🤖: `{zinger}` 🔥🔥🔥\n')
 
                         c1, c2 = st.columns((1, 7))
-                        emoji = '🔥 😲 😭 👹 ☠️ 😇 ❤️'.split(" ")
+                        emoji = '🔥🔥🔥 😲 😭 😎 👹 ☠️ 😇 ❤️'.split(" ")
                         feel = c1.selectbox('Feeling', emoji)
                         c2.write('')
                         c2.write('')
