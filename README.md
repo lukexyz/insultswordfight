@@ -56,9 +56,12 @@ generation = client.generation("""Insult: You fight like a dairy Farmer!
 print('\n🔥🔥🔥 ', generation["generated_text"])
 ```
 
-And `few-shot learning` in illustrated form,
+And few-shot learning in illustrated form,
 
-![Primer text](media/few_shot_learning.PNG)
+<p align="center">
+  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/few_shot_learning.PNG" width=50%>  
+</p>
+
 
 ## Development Notebook using `GPT-J`
 
