@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/Vertical_Intro_Splash_3_border.PNG" width=80%> 
+  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/Vertical_Intro_Splash_3_border.png" width=80%> 
 </p>
 
 ## Online here [ www.pirateinsults.com 🏴‍☠️](https://pirateinsults.com)
