@@ -170,7 +170,7 @@ def main():
             
 
 if __name__ == '__main__':
-    st.set_page_config(page_title="Insult Sword Fighter",
+    st.set_page_config(page_title="Insult Sword Fighting",
         page_icon="☠️",
         layout="centered",
         initial_sidebar_state="auto")
