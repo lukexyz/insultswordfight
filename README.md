@@ -1,11 +1,17 @@
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/Vertical_Intro_Splash_3_border.png" width=80%> 
+  <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/full_screenshot1_border.PNG" width=60%> 
+  <h1 align="center">🏴‍
+  <a href="https://pirateinsults.com">Insult Sword Fighting</a> 🏴‍</h1>
+  
 </p>
 
-## Online here [ www.pirateinsults.com 🏴‍☠️](https://pirateinsults.com)
+<p align="center">
+Online demo <a href="https://pirateinsults.com">www.pirateinsults.com</a> 🔗
+</p>
 
+<br></br> 
 Built with [streamlit](streamlit.io) and `GPT-J` using few shot learning with [nlpcloud](nlpcloud.io).
-<br />
 
 ## Generated zingers 🍒
 
