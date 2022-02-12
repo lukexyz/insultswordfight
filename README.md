@@ -7,7 +7,7 @@
 <a href="https://pirateinsults.com">www.pirateinsults.com</a> 
 </p>
 
-<br></br> 
+<br></br>
 Built with [streamlit](streamlit.io) and `GPT-J` using few shot learning with [nlpcloud](nlpcloud.io).
 
 ## Generated zingers 🍒
@@ -56,11 +56,16 @@ generation = client.generation("""Insult: You fight like a dairy Farmer!
 print('\n🔥🔥🔥 ', generation["generated_text"])
 ```
 
+And `few-shot learning` in illustrated form,
+
+![Primer text](media/few_shot_learning.PNG)
+
 ## Development Notebook using `GPT-J`
 
 > :bookmark_tabs: [zingers_GPT-J.ipynb](https://github.com/lukexyz/insultswordfight/blob/master/notebooks/00_zingers_GPT-J.ipynb)
 
 ## Online App
+
 Streamlit script
 
 > :bookmark_tabs: [app.py](https://github.com/lukexyz/insultswordfight/blob/master/app.py)
@@ -68,7 +73,6 @@ Streamlit script
 The web app is running online at [pirateinsults.com](http://pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish.
 
 The web app is created with streamlit, hosted (free) by streamlit.io, and I've created a blind redirect for a custom domain [pirateinsults.com](http://pirateinsults.com) to go to the internal streamlit IP they gave me.
-
 
 <p align="center">
 <a href="https://pirateinsults.com">www.pirateinsults.com</a> 
@@ -78,8 +82,6 @@ The web app is created with streamlit, hosted (free) by streamlit.io, and I've c
   <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/full_screenshot1_border.PNG" width=50%> 
   </a>
 </p>
-
-
 
 ## References
 
