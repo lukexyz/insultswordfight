@@ -3,6 +3,5 @@ toml
 lxml
 nlpcloud
 streamlit==1.2.0
-prodb==0.0.4
+prodb==0.0.5
 arrow
-streamlit-autorefresh

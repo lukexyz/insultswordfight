@@ -138,22 +138,18 @@ def main():
                                     'comeback': st.session_state.zingers[0]}
                             bb = insert_row(bb, data, dbpath)
                         
-
                     else: st.write('Generate zinger above')
                 placeholder = st.empty()
-                
-                #bzcol1, bzcol2 = st.columns([10, 4])
-                #with bzcol2: st.image('media/burnbook_img.png', width=160)
 
                 # ================= metrics ================= #
                 col0, col1, col2, col3 = st.columns([1, 1, 1, 1])
                 file_size = os.path.getsize(dbpath)
-                col0.metric(f"💾 {dbpath}", f"{df.shape[0]}", "total rows")
+                col0.metric(f"💾 {dbpath}", f"{bb.shape[0]}", "total rows")
                 col1.metric("📁 filesize", f"{file_size/1000:0.2f}", 'kb')
-                burn_rows = col3.slider('🎲 latest burns', 1, min(25, df.shape[0]), 6)
+                burn_rows = col3.slider('🎲 latest burns', 1, min(25, bb.shape[0]), 6)
                 #col3.image('media/burnbook_img.png', width=200)
 
-                placeholder.table(readable_df(bb, max_rows=5)[['human_time', 'mood', 'insult', 'comeback']][::-1].rename(columns={"human_time": "when"}).head(burn_rows))
+                placeholder.table(readable_df(bb, max_rows=50)[['human_time', 'mood', 'insult', 'comeback']][::-1].rename(columns={"human_time": "when"}).iloc[:burn_rows, :])
                 
 
 
