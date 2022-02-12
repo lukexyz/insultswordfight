@@ -127,7 +127,7 @@ def main():
                         st.write(f'\tComeback 🤖: `{zinger}` 🔥🔥🔥\n')
 
                         c1, c2 = st.columns((1, 7))
-                        emoji = '🔥🔥🔥 😲 😭 😎 👹 ☠️ 😇 ❤️'.split(" ")
+                        emoji = '🔥🔥 😲 😭 😎 👹 ☠️ 💅 😇 💖'.split(" ")
                         feel = c1.selectbox('Feeling', emoji)
                         c2.write('')
                         c2.write('')
