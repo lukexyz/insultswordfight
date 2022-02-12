@@ -47,7 +47,7 @@ def main():
 
     # ------------------------ control flow ------------------------ #
     if 'count' not in st.session_state: 
-        st.session_state.count = 0
+        st.session_state.count = 0  # API count
         st.session_state.fire_flag = False
         st.session_state.burn_book_flag = False
         st.session_state.zingers = []
@@ -114,27 +114,48 @@ def main():
 
         if st.session_state.zingers:
             st.markdown("---")
-            st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? We're here to help.</i></p1>", unsafe_allow_html=True)
-
-            with st.expander("Open Burnbook", expanded=False):
+            st.markdown("<p1 style='text-align: right; color: black;'> <i>Been hurt by a savage zinger? Share it in the burn book.</i></p1>", unsafe_allow_html=True)
+            if st.session_state.count == 1: # pro UX move
+                with st.spinner('Fetching burn book...'):
+                    time.sleep(3)
+            with st.expander("burn book", expanded=True):
                 # if insult not in example_insults
                 zinger = st.session_state.zingers
                 if zinger:
                     st.write(f'Insult: ☠️ {insult}\n')
                     if st.session_state.zingers[0]:
                         st.write(f'\tComeback 🤖: `{zinger}` 🔥🔥🔥\n')
-                        if st.button('+ add to burn book 🍒'):
-                            data = {'time_utc':utc_now(), 'insult':f"{insult}",
-                                    'comeback': st.session_state.zingers[0]+" 🔥🔥🔥"}
+
+                        c1, c2 = st.columns((1, 7))
+                        emoji = '🔥 😲 😭 👹 ☠️ 😇 ❤️'.split(" ")
+                        feel = c1.selectbox('Feeling', emoji)
+                        c2.write('')
+                        c2.write('')
+                        if c2.button('+ add to burn book 🍒'):
+                            data = {'time_utc':utc_now(),
+                                    'mood':feel,
+                                    'insult':f"{insult}",
+                                    'comeback': st.session_state.zingers[0]}
                             bb = insert_row(bb, data, dbpath)
+                        
 
                     else: st.write('Generate zinger above')
-                st.table(readable_df(bb, max_rows=5)[['human_time', 'insult', 'comeback']][::-1].head(3))
-                bzcol1, bzcol2 = st.columns([10, 4])
-                with bzcol2: st.image('media/burnbook_img.png', width=160)
-                with bzcol1: 
-                    if st.button('🖱️🖱️ Double Click to view Burnbook'):
-                        st.session_state.page_nav = "burnbook"
+                placeholder = st.empty()
+                
+                #bzcol1, bzcol2 = st.columns([10, 4])
+                #with bzcol2: st.image('media/burnbook_img.png', width=160)
+
+                # ================= metrics ================= #
+                col0, col1, col2, col3 = st.columns([1, 1, 1, 1])
+                file_size = os.path.getsize(dbpath)
+                col0.metric(f"💾 {dbpath}", f"{df.shape[0]}", "total rows")
+                col1.metric("📁 filesize", f"{file_size/1000:0.2f}", 'kb')
+                burn_rows = col3.slider('🎲 latest burns', 1, min(25, df.shape[0]), 6)
+                #col3.image('media/burnbook_img.png', width=200)
+
+                placeholder.table(readable_df(bb, max_rows=5)[['human_time', 'mood', 'insult', 'comeback']][::-1].rename(columns={"human_time": "when"}).head(burn_rows))
+                
+
 
         # -------------------------------------------------------- #
         st.write("")
@@ -163,7 +184,7 @@ def main():
         bcol1, bcol2 = st.columns([12, 3])
         with bcol2: st.image('media/burnbook_img.png', width=120)
         with bcol1: st.warning('"With great power, comes great responsibility" - Mêlée Island Sword Master')
-        st.table(readable_df(bb, max_rows=20)[['human_time', 'insult', 'comeback']][::-1].head(20))
+        st.table(readable_df(bb, max_rows=20)[['human_time', 'mood', 'insult', 'comeback']][::-1].head(20))
         if st.button('🖱️🖱️ Double Click for Frontpage'): 
             st.session_state.page_nav = "frontpage"
             st.session_state.zingers = []
