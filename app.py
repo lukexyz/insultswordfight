@@ -150,7 +150,8 @@ def main():
                 #col3.image('media/burnbook_img.png', width=200)
 
                 placeholder.table(readable_df(bb, max_rows=50)[['human_time', 'mood', 'insult', 'comeback']][::-1].rename(columns={"human_time": "when"}).iloc[:burn_rows, :])
-                
+                with open(dbpath, 'rb') as f:
+                    st.download_button('Download .csv', f, file_name='burnbook.csv')
 
 
         # -------------------------------------------------------- #
