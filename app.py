@@ -42,7 +42,7 @@ def main():
     # -------------------- initialize burn book -------------------- #
     dbpath = 'bb.csv'
     if not os.path.isfile(dbpath): 
-        bb = generate_db(dbpath=dbpath, cols=['time_utc', 'insult', 'comeback'])
+        bb = generate_db(dbpath=dbpath, cols=['time_utc', 'mood', 'insult', 'comeback'])
     else: bb = pd.read_csv(dbpath)
 
     # ------------------------ control flow ------------------------ #
