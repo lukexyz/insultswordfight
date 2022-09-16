@@ -40,7 +40,7 @@ def burn_book():
 
 def main():
     # -------------------- initialize burn book -------------------- #
-    dbpath = 'data/bb.csv'
+    dbpath = 'data/premium_zingers.csv'
     if not os.path.isfile(dbpath): 
         bb = generate_db(dbpath=dbpath, cols=['time_utc', 'mood', 'insult', 'comeback'])
     else: bb = pd.read_csv(dbpath)
@@ -127,7 +127,7 @@ def main():
                         st.write(f'\tComeback 🤖: `{zinger}` 🔥🔥🔥\n')
 
                         c1, c2 = st.columns((1, 7))
-                        emoji = '🔥🔥 😲 😭 😎 👹 ☠️ 💅 😇 💖'.split(" ")
+                        emoji = '🔥 😲 😭 😎 👹 ☠️ 💅 😇 💖'.split(" ")
                         feel = c1.selectbox('Feeling', emoji)
                         c2.write('')
                         c2.write('')
@@ -146,10 +146,10 @@ def main():
                 file_size = os.path.getsize(dbpath)
                 col0.metric(f"💾 {dbpath}", f"{bb.shape[0]}", "total rows")
                 col1.metric("📁 filesize", f"{file_size/1000:0.2f}", 'kb')
-                burn_rows = col3.slider('🎲 latest burns', 1, min(25, bb.shape[0]), 6)
+                burn_rows = col3.slider('🎲 display count', 1, min(100, bb.shape[0]), 12)
                 #col3.image('media/burnbook_img.png', width=200)
 
-                placeholder.table(readable_df(bb, max_rows=50)[['human_time', 'mood', 'insult', 'comeback']][::-1].rename(columns={"human_time": "when"}).iloc[:burn_rows, :])
+                placeholder.table(readable_df(bb, max_rows=50)[['human_time', 'insult', 'comeback', 'mood']][::-1].rename(columns={"human_time": "when"}).iloc[:burn_rows, :])
                 with open(dbpath, 'rb') as f:
                     st.download_button('Download .csv', f, file_name='burnbook.csv')
 
