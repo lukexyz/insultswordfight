@@ -1,10 +1,10 @@
 <p align="center">
   <img src="https://raw.githubusercontent.com/lukexyz/insultswordfight/master/media/splash_header_3_small.jpg" width=60%> 
-  <h1 align="center">☠️ <a href="https://pirateinsults.com">Insult Sword Fighting</a> ☠️</h1>
+  <h1 align="center">☠️ <a href="https://lukexyz-insultswordfight-app-skg8pm.streamlitapp.com/">Insult Sword Fighting</a> ☠️</h1>
 </p>
 
 <p align="center">
-<a href="https://pirateinsults.com">www.pirateinsults.com</a> 
+<a href="Open In Streamlit">https://lukexyz-insultswordfight-app-skg8pm.streamlitapp.com/</a> 
 </p>
 
 <br></br>
