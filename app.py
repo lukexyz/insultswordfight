@@ -42,7 +42,7 @@ def main():
     # -------------------- initialize burn book -------------------- #
     dbpath = 'data/bb.csv'
     if not os.path.isfile(dbpath): 
-        bb = generate_db(dbpath=dbpath, cols=['time_utc', 'insult', 'comeback'])
+        bb = generate_db(dbpath=dbpath, cols=['time_utc', 'mood', 'insult', 'comeback'])
     else: bb = pd.read_csv(dbpath)
 
     # ------------------------ control flow ------------------------ #
@@ -150,7 +150,8 @@ def main():
                 #col3.image('media/burnbook_img.png', width=200)
 
                 placeholder.table(readable_df(bb, max_rows=50)[['human_time', 'mood', 'insult', 'comeback']][::-1].rename(columns={"human_time": "when"}).iloc[:burn_rows, :])
-                
+                with open(dbpath, 'rb') as f:
+                    st.download_button('Download .csv', f, file_name='burnbook.csv')
 
 
         # -------------------------------------------------------- #
