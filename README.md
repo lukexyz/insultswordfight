@@ -83,8 +83,8 @@ The web app is running online at [~~pirateinsults.com~~](http://pirateinsults.co
 
 The web app is created with streamlit, hosted (free) by streamlit.io, and I've created a blind redirect for a custom domain [~~pirateinsults.com~~](http://pirateinsults.com) to go to the internal streamlit IP they gave me.
 
-<p align="center">
-<a href="https://pirateinsults.com">www.pirateinsults.com</a> 
+<p align="center"><del>
+<a href="https://pirateinsults.com">www.pirateinsults.com</a> </del>
 </p>
 <p align="center">
   <a href="https://pirateinsults.com">
