@@ -79,9 +79,9 @@ Streamlit script
 
 > :bookmark_tabs: [app.py](https://github.com/lukexyz/insultswordfight/blob/master/app.py)
 
-The web app is running online at [pirateinsults.com](http://pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish.
+The web app is running online at [~~pirateinsults.com~~](http://pirateinsults.com), which allows you to try out different insults, and add them to the hall of fame if you wish.
 
-The web app is created with streamlit, hosted (free) by streamlit.io, and I've created a blind redirect for a custom domain [pirateinsults.com](http://pirateinsults.com) to go to the internal streamlit IP they gave me.
+The web app is created with streamlit, hosted (free) by streamlit.io, and I've created a blind redirect for a custom domain [~~pirateinsults.com~~](http://pirateinsults.com) to go to the internal streamlit IP they gave me.
 
 <p align="center">
 <a href="https://pirateinsults.com">www.pirateinsults.com</a> 
