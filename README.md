@@ -4,13 +4,19 @@
 </p>
 
 <p align="center">
-<a href="Open In Streamlit">https://lukexyz-insultswordfight-app-skg8pm.streamlitapp.com/</a> 
+<a href="Open In Streamlit"><del>https://lukexyz-insultswordfight-app-skg8pm.streamlitapp.com/</del></a> 
 </p>
 
-<br></br>
 Built with [streamlit](streamlit.io) and `GPT-J` using few shot learning with [nlpcloud](nlpcloud.io).
 
-## Generated zingers 🍒
+# Community Zingers 🔥🔥🤨
+Worst of the worst. Third degree burns submitted by users to the [**📓 `burn_book`**](./data/premium_zingers.csv) from over a thousand users on the subreddit.
+
+> → 📓 [burnbook_prod.csv](./data/burnbook_prod.csv)  
+
+> → ⚠️⚠️ [**premium_zingers.csv**](./data/premium_zingers.csv)
+
+## Vanilla Zingers (example) 🍒
 
 ☠️ Insult: I once owned a dog that was smarter than you. ☠️  
 `Comeback: (0) I hope you lost him.` 🔥🔥🔥
